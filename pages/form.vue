@@ -1,7 +1,34 @@
 <template>
 <main class="flex justify-center">
     <div class="p-2">
-        <form @submit="customSubmit" class="bg-blue-100  rounded-lg border-2 px-12 ">
+        <!-- <div class="flex flex-wrap gap-1 justify-between lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-1"> -->
+            <div>
+                <button @click="showSlots" class="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out rounded-full">
+                    showSlots
+                </button>
+            </div>
+            <div class="border-2 border-black w-2/10" v-for="item in timeSlots">
+                <div>
+                    <br />
+                    <span class="block text-sm font-medium text-slate-700">Start Time-{{ item.startTime }}</span>
+                </div>
+                <br/>
+                <div>
+                    <br />
+                    <span class="block text-sm font-medium text-slate-700">End Time-{{ item.endTime }}</span>
+                </div>
+                <br/>
+                <div>
+                    
+                        <button @click="display" type="submit" class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out rounded-full">
+                         <label for="firstname">   Book Now </label>
+                        </button>
+                
+                </div>
+            <!-- </div> -->
+        </div>
+
+        <form  v-if="formshow == true"  @submit="customSubmit" class="bg-blue-100  rounded-lg border-2 px-12 ">
             <table class="grid  content-center">
                 <h2 class="text-teal-900  text-center font-bold text-4xl pt-6">Appointment Verification</h2>
                 <hr />
@@ -14,31 +41,7 @@
                 <input type="email" v-model="user.email" id="email" name="email" placeholder="Enter your Email id" />
                 <label class="font-bold text-xl pt-3" for="number">Phone Number: </label>
                 <input type="number" v-model="user.number" id="number" name="number" placeholder="Enter your number" />
-                <label class="font-bold text-xl pt-3" for="address"> Address: </label>
-                <input type="text" v-model="user.address" id="address" name="address" placeholder="Enter your address" />
-                <label class="font-bold text-xl">Purpose of appointment:</label>
-                <input type="text" v-model="user.purpose" id="purpose" name="purpose" placeholder="Enter your purpose of appointment" />
-                <div class="pt-3">
-                    <label class="font-bold text-xl pt-3" for="city"> Select your city: </label>
-                    <select v-model="user.city">
-                        <option>select</option>
-                        <option>Pune</option>
-                        <option>Satara</option>
-                        <option>Mumbai</option>
-                        <option>Nashik</option>
-                        <option>Sangli</option>
-                        <option>Parbhani</option>
-                        <option>other</option>
-                    </select>
 
-                </div>
-                <div class="pt-3">
-                    <label class="font-bold text-xl pt-3">Gender: </label>
-                    <label class="" for="male">Male</label>
-                    <input type="radio" value="male" v-model="user.gender" name="gender" id="male">
-                    <label class="" for="female">Female</label>
-                    <input type="radio" value="female" v-model="user.gender" name="gender" id="female">
-                </div>
                 <div class="pt-3">
                     <label class="font-bold text-xl pt-3" for="time"> Selected Time Slot: </label>
                     <select v-model="user.time">
@@ -66,42 +69,40 @@
 
                 <!-- </div> -->
                 <div class="text-center pt-10">
-                    <button class="py-2 px-10 mr-5 bg-blue-500 hover:bg-blue-700 text-white font-bold text-center rounded-md mb-3" type="submit" @click="customSubmit">Book </button>
+                    <button class="py-2 px-10 mr-5 bg-blue-500 hover:bg-blue-700 text-white font-bold text-center rounded-md mb-3" type="submit" @click="customSubmit">submit </button>
                     <button class="py-2 px-10 bg-blue-500 hover:bg-blue-700 text-white font-bold text-center rounded-md mb-3" type="reset"> Cancel </button>
                 </div>
             </table>
-        </form>
-        <br>
-        <table class="list">
-            <h1 class="text-teal-900 text-xl font-bold pt-1">DataBase table:</h1>
-            <tr>
-                <th class="px-4 border-black rounded-lg border-2">Id</th>
-                <th class="px-4 border-black rounded-lg border-2">First Name</th>
-                <th class="px-4 border-black rounded-lg border-2">Last Name</th>
-                <th class="px-4 border-black rounded-lg border-2">Email Id</th>
-                <th class="px-4 border-black rounded-lg border-2">Number</th>
-                <th class="px-4 border-black rounded-lg border-2">Address</th>
-                <th class="px-4 border-black rounded-lg border-2">City</th>
-                <th class="px-4 border-black rounded-lg border-2">Gender</th>
-                <th class="px-4 border-black rounded-lg border-2">selected time</th>
-                <th class="px-4 border-black rounded-lg border-2">purpose of the appointment:</th>
-                 <th class="px-4 border-black rounded-lg border-2">Action</th>
-            </tr>
-            <tr v-for="(item, i) in myarr" :key="item">
-                <td class="px-4 border-black rounded-lg border-2">{{item.id = i+1}}</td>
-                <td class="px-4 border-black rounded-lg border-2">{{item.firstname}}</td>
-                <td class="px-4 border-black rounded-lg border-2">{{item.lastname}}</td>
-                <td class="px-4 border-black rounded-lg border-2">{{item.email}}</td>
-                <td class="px-4 border-black rounded-lg border-2">{{item.number}}</td>
-                <td class="px-4 border-black rounded-lg border-2">{{item.address}}</td>
-                <td class="px-4 border-black rounded-lg border-2">{{item.city}}</td>
-                <td class="px-4 border-black rounded-lg border-2">{{item.gender}}</td>
-                <td class="px-4 border-black rounded-lg border-2">{{item.time}}</td>
-                <td class="px-4 border-black rounded-lg border-2">{{item.purpose}}</td>
-                 <td class="px-4 border-black rounded-lg border-2"> <button class="py-1 px-5 bg-green-500 hover:bg-green-700 text-white font-bold text-center rounded-md" > Booked </button></td>
-            </tr>
-        </table>
+    
+    </form>
     </div>
+    <br>
+    <table class="list">
+        <h1 class="text-teal-900 text-xl font-bold pt-1">DataBase table:</h1>
+        <tr>
+            <th class="px-4 border-black rounded-lg border-2">Id</th>
+            <th class="px-4 border-black rounded-lg border-2">First Name</th>
+            <th class="px-4 border-black rounded-lg border-2">Last Name</th>
+            <th class="px-4 border-black rounded-lg border-2">Email Id</th>
+            <th class="px-4 border-black rounded-lg border-2">Number</th>
+
+            <th class="px-4 border-black rounded-lg border-2">selected time</th>
+
+            <th class="px-4 border-black rounded-lg border-2">Action</th>
+        </tr>
+        <tr v-for="(item, i) in myarr" :key="item">
+            <td class="px-4 border-black rounded-lg border-2">{{item.id = i+1}}</td>
+            <td class="px-4 border-black rounded-lg border-2">{{item.firstname}}</td>
+            <td class="px-4 border-black rounded-lg border-2">{{item.lastname}}</td>
+            <td class="px-4 border-black rounded-lg border-2">{{item.email}}</td>
+            <td class="px-4 border-black rounded-lg border-2">{{item.number}}</td>
+
+            <td class="px-4 border-black rounded-lg border-2">{{item.time}}</td>
+
+            <td class="px-4 border-black rounded-lg border-2"> <button class="py-1 px-5 bg-green-500 hover:bg-green-700 text-white font-bold text-center rounded-md"> Booked </button></td>
+        </tr>
+    </table>
+
 </main>
 </template>
 
@@ -110,6 +111,8 @@
 export default {
     data() {
         return {
+            timeSlots: [],
+            formshow:false,
             isEdit: false,
             indexEdit: -1,
             myarr: [],
@@ -119,11 +122,9 @@ export default {
                 lastname: '',
                 email: '',
                 number: '',
-                address: '',
-                city: '',
-                gender: '',
+
                 time: '',
-                purpose: '',
+
             },
         };
     },
@@ -143,11 +144,9 @@ export default {
                 lastname: '',
                 email: '',
                 number: '',
-                address: '',
-                city: '',
-                gender: '',
+
                 time: '',
-                purpose: '',
+
             };
         },
         customDelete(index) {
@@ -158,15 +157,34 @@ export default {
             this.user.lastname = this.myarr[index].lastname;
             this.user.email = this.myarr[index].email;
             this.user.number = this.myarr[index].number;
-            this.user.address = this.myarr[index].address;
-            this.user.city = this.myarr[index].city;
-            this.user.gender = this.myarr[index].gender;
+
             this.user.profession = this.myarr[index].time;
-            this.user.profession = this.myarr[index].profession;
 
             this.isEdit = true;
             this.indexEdit = index;
-        }
+        },
+
+        showSlots() {
+            var d = new Date("2022-08-01 09:00:00");
+            var e = new Date("2022-08-01 09:00:00");
+            for (let i = 0; i < 20; i++) {
+                d.setMinutes(d.getMinutes() + 10);
+                e.setMinutes(d.getMinutes() - 10);
+                // console.log(d);
+                this.timeSlots.push({
+                    startTime: e.toLocaleTimeString(),
+                    endTime: d.toLocaleTimeString(),
+                });
+            }
+        },
+        display(){
+            this.formshow=true;
+        },
+        book() {
+            window.confirm('This Slots is Booked Now');
+            document.getElementById("cartBg").style = "background-color:green;";
+
+        },
     }
 }
 </script>
