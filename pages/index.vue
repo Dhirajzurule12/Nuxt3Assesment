@@ -1,5 +1,5 @@
 <template>
-<main class="flex justify-center">
+<main class="flex justify-center bg-[url('https://png.pngtree.com/background/20210709/original/pngtree-blue-high-end-atmosphere-technology-future-picture-image_939127.jpg')] ">
     <div class="p-2">
         <!-- <div class="flex flex-wrap gap-1 justify-between lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-1"> -->
         <div>
@@ -8,7 +8,7 @@
             </button>
         </div>
         <div>
-            <div class="border-2 border-black w-2/10" v-for="item in timeSlots">
+            <div class="border-2  mt-4 space-x-4 bg-pink-100 border-black w-2/10 rounded-square px-4 py-2" v-for="item in timeSlots">
                 <div>
                     <br />
                     <span class="block text-sm font-medium text-slate-700">Start Time-{{ item.startTime }}</span>
@@ -98,7 +98,7 @@
         </div>
         <br>
         <div v-if="formshow == true">
-            <table class="list">
+            <table class="list bg-gray-100">
                 <h1 class="text-teal-900 text-xl font-bold pt-1">DataBase table:</h1>
                 <tr>
                     <th class="px-4 border-black rounded-lg border-2">Id</th>
