@@ -66,7 +66,7 @@
                         <label class="font-bold text-xl pt-3" for="time"> Selected Time Slot: </label>
                         <select v-model="user.time">
                             <option>select</option>
-                            <option>10:00 To 10:10</option>
+                            <option>10:01 To 10:11</option>
                             <option>10:20 To 10:30</option>
                             <option>10:40 To 10:50</option>
                             <option>11:00 To 11:10</option>
