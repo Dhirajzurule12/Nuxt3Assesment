@@ -77,7 +77,7 @@
                             <option>12:00 To 12:10</option>
                             <option>12:20 To 12:30</option>
                             <option>12:40 to 12:50</option>
-                            <option>01:10 to 01:20</option>
+                            <option>01:1io to 01:20</option>
                             <option>01:30 to 01:40</option>
                             <option>02:20 to 02:30</option>
                             <option>03:20 to 03:30</option>
